@@ -1,14 +1,16 @@
-module up_down( input clk,reset,up_down,
-output reg [7:0] count);
-always @(posedge clk, negedge reset) begin
-if (!reset) begin
-count <= 2'b0;
-end
-else if (up_down) begin
-count <= count + 1;
-end
-else begin
-count <= count - 1;
-end
-end
+module up_down(input clk, reset,up_down, output[3:0]  counter
+    );
+reg [3:0] counter_up_down;
+
+// down counter
+always @(posedge clk or posedge reset)
+begin
+if(reset)
+ counter_up_down <= 4'b0;
+else if(~up_down)
+ counter_up_down <= counter_up_down + 4'd1;
+else
+ counter_up_down <= counter_up_down - 4'd1;
+end 
+assign counter = counter_up_down;
 endmodule
