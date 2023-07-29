@@ -1,3 +1,5 @@
+// QUESTION SEQUENCE DETECTOR FOR THE FOLLOWING 1011 .WRITE THE VERILOG CODE.//
+
 module Seq_gen(
     input clk,rst,seq,
     output reg  y
