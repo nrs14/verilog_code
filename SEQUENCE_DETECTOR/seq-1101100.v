@@ -1,45 +1,51 @@
-module seq_det1(
-    input clk,rst,seq,
-    output reg  y
-    );
-localparam a=3'b000;
-localparam b=3'b001;
-localparam c=3'b010;
-localparam d=3'b011;
-localparam e=3'b100;
-localparam f=3'b101;
-localparam g=3'b110;
-
-reg [2:0] pre,nxt;
-always @ (posedge clk,posedge rst)
-begin
-   if(rst) pre=a;
-	else  pre=nxt;
+module Seq(input x , clk , rst,output reg y);
+parameter A = 3'b000;
+parameter B = 3'b001;
+parameter C = 3'b010;
+parameter D = 3'b011;
+parameter E = 3'b100;
+parameter F = 3'b101;
+parameter G = 3'b110;
+reg [2:0]p,n;
+always @(posedge clk , posedge rst)
+begin 
+if(rst) n = A ; 
+else 
+begin 
+case({p})					
+A : begin 
+y = 0;
+if(x) n = B;
+else n = A; end
+B: begin 
+y = 0;
+if(x) n = C;
+else n = A; end
+C : begin 
+y = 0;
+if(x) n = C;
+else n = D; end
+D: begin 
+y = 0;
+if(x) n = E;
+else n = A; end
+E : begin 
+y = 0;
+if(x) n = F;
+else n = A; end
+F : begin 
+y = 0;
+if(x) n = C;
+else n = G;
 end
-always @ *
-   begin
-     pre=nxt;
-     y=1'b0;
-     case(pre)
-       a:if(seq)  nxt=b;
-         else nxt=a;	
-       b:if(seq)  nxt=c;
-         else nxt=a;
-       c:if(seq)  nxt=c;
-         else nxt=d;
-		 d:if(seq)  nxt=e;
-         else nxt=a;	
-       e:if(seq)  nxt=f;
-         else nxt=a;
-       f:if(seq)  nxt=b;
-         else nxt=g;
-       g:if(seq) begin
-     		 nxt=d;  y=1'b1;
-			 end
-         else nxt=a;
-       default:begin
-         y=1'b0;   nxt=a;
-        end
-     endcase
-   end	  
+G : begin 
+y = 0;
+if(x) n  = E;
+else 		
+begin n = A; y = 1'b1; end
+end
+endcase
+p = n;
+end
+end
 endmodule
