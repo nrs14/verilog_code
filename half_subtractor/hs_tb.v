@@ -1,13 +1,8 @@
 module hs_tb;
-
-	// Inputs
-	reg a;
+	reg a;// Inputs
 	reg b;
-
-	// Outputs
 	wire d;
-	wire bo;
-
+	wire bo;// Outputs
 	// Instantiate the Unit Under Test (UUT)
 	hs uut (
 		.a(a), 
@@ -15,18 +10,12 @@ module hs_tb;
 		.d(d), 
 		.bo(bo)
 	);
-
 	initial begin
 		// Initialize Inputs
 		a = 0;b = 0;
-
 		// Wait 100 ns for global reset to finish
 		#100 a = 0;b = 1;
 		#100 a = 1;b = 0;
 		#100 a = 1;b = 1;
-     //  #$finish; 
-		// Add stimulus here
-
-	end
-      
+	end      
 endmodule
